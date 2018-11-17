@@ -1,0 +1,65 @@
+body{
+    margin:0;
+    padding: 0;
+}
+.container{
+    text-align: center;
+    margin-top: 30px;   
+}
+.main{
+    text-align: center;
+    margin-top: 30px;   
+}
+label{
+    background: none;
+    padding:10px 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
+    padding: 10px;
+    color:#3498bd;  
+}
+input{
+    border:1px solid #3498bd;
+    background: none;
+    text-align: left;
+    margin-left: 30px;
+}
+#array, #way{
+    text-align: center;
+    background: none;
+    padding:10px 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
+    padding: 10px;
+    color:#3498bd;  
+}
+.btn1{
+    border:1px solid #3498bd;
+    background: none;
+    padding:10px 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    cursor: pointer;
+    margin: 10px;
+    color:#3498bd;   
+}
+.btn1:hover{
+    color:#fff;
+}
+.btn1::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: #3498bd;
+    z-index: -1;
+    transition: 0.8s;
+    
+}
+/* .btn1::before{
+    top:0;
+    border-radius:50% 50% 0 0;   
+}
+.btn1:hover::before{
+    height: 180%;
+} */
