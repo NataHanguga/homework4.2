@@ -3,23 +3,23 @@ window.onload = function () {
 }
 function drawArray() {
     let spiralArray = {
-        length: Number(document.getElementById('length').value),//размерность массива (строки)
-        height: Number(document.getElementById('height').value),//размерность массива (столбцы)
-        x: Number(document.getElementById('x0').value),//координаты начала записи массива строки
-        y: Number(document.getElementById('y0').value),//координаты начала записи массива столбцы
-        directionX: 0,//смещение по оси х
-        directionY: 0,//смешение по оси у
-        step: 1,//шаг елемента
-        direction: -1,//направление движения
-        turn: 0,//счетчик поворотов
-        count: 0,//счетчик количества вводов в ячейки
-        error: 0,//счетчик ошибок
-        index: [],//массив индексов
-        arr: []//массив чисел
+        length: Number(document.getElementById('length').value),//row length
+        height: Number(document.getElementById('height').value),//col length
+        x: Number(document.getElementById('x0').value),//row point
+        y: Number(document.getElementById('y0').value),//col point
+        directionX: 0,//x bias
+        directionY: 0,//y bias
+        step: 1,//step
+        direction: -1,//move direction
+        turn: 0,//turn count
+        count: 0,//cell count
+        error: 0,//error count
+        index: [],//index array
+        arr: []//numbers aray
     };
 
     for (let i = 0; i < spiralArray.length; i++) {
-        spiralArray.arr[i] = new Array();//инициализация массива
+        spiralArray.arr[i] = new Array();//create massive
         for (let j = 0; j < spiralArray.height; j++) {
             spiralArray.arr[i][j] = 0;
         }
@@ -48,52 +48,45 @@ function drawArray() {
             spiralArray.directionY = 0
             spiralArray.direction = -10;// 1- top 0/1
         }
-        console.log('dx ' + spiralArray.directionX, 'dy ' + spiralArray.directionY, 'dir ' + spiralArray.direction, 'x ' + spiralArray.x, 'y ' + spiralArray.y);
-        for (let s = 0; s < spiralArray.step; s++) {// cчетчик шагов
-            if (((spiralArray.x >= 0) && (spiralArray.x < spiralArray.height)) && ((spiralArray.y >= 0) && (spiralArray.y < spiralArray.length))) {//если в границах массива пишем елемент
-                if (spiralArray.count < 10) { //для коректного вывода массива
-                    spiralArray.count = '0' + spiralArray.count;//добавляем к однозначным числам спереди 0
+        for (let s = 0; s < spiralArray.step; s++) {// step count
+            if (((spiralArray.x >= 0) && 
+                (spiralArray.x < spiralArray.height)) && 
+                ((spiralArray.y >= 0) && 
+                (spiralArray.y < spiralArray.length))) {//if number within the array write number to numbers arr
+                if (spiralArray.count < 10) { //for beautifi output
+                    spiralArray.count = '0' + spiralArray.count;//add '0' to one-sign numbers
                 }
 
-                spiralArray.arr[spiralArray.y][spiralArray.x] = spiralArray.count;//запись числа к массиву
-                spiralArray.index = spiralArray.index.concat('(' + spiralArray.x + ';' + spiralArray.y + ')');//запись индексов элементов в ходе заполнения массива
-                spiralArray.count++;//инкрементируем значение елементов
-                console.log('step ' + spiralArray.step, 'count ' + spiralArray.count, 'x ' + spiralArray.x, 'y ' + spiralArray.y);
-            } else {
-                spiralArray.error++;//если индекс за гранями массива инкрементируем ошибку
-                console.log('error ' + spiralArray.error);
+                spiralArray.arr[spiralArray.y][spiralArray.x] = spiralArray.count;//push num to arr
+                spiralArray.index = spiralArray.index.concat('(' + spiralArray.x + ';' + spiralArray.y + ')');//push num index to index arr
+                spiralArray.count++;//increment number
+                } else {
+                spiralArray.error++;//if numbe rwithout the array push error to error arr
             }
-            spiralArray.x += spiralArray.directionX;//увеличиваем индекс горизонтали
-            spiralArray.y += spiralArray.directionY;//увеличиваем индекс вертикали
+            spiralArray.x += spiralArray.directionX;//increase row index
+            spiralArray.y += spiralArray.directionY;//increase col index
         }
-        spiralArray.turn++;//инкрементируем поворот
-        console.log(spiralArray.k);
-        if (spiralArray.turn == 2) {//если к==2 то увеличить длину шага
+        spiralArray.turn++;//turn++
+        if (spiralArray.turn == 2) {//if k=2 increase step length
             spiralArray.step++;
-            spiralArray.turn = 0;//обнулить поворот
+            spiralArray.turn = 0;//turn=0
         }
     }
 
-    console.log(spiralArray.arr);//вывод массива в консоль
-    console.log('      ');
-    console.log(spiralArray.index);//вывод индексную дорогу в консоль
-
     let array = 'Spiral Matrix<br>';
-    let outputArray = document.getElementById('array');//привязка до элемента на html-странице
+    let outputArray = document.getElementById('array');
     for (let i = 0; i < spiralArray.length; i++) {
         for (let j = 0; j < spiralArray.height; j++) {
-            array += spiralArray.arr[i][j] + ' ';//запись массива в строку
+            array += spiralArray.arr[i][j] + ' ';//add array to string
         }
         array += '<br>';
     }
-    outputArray.innerHTML = array;//вывод строки в html
+    outputArray.innerHTML = array;//output string to html
 
     let way = 'Way<br>';
-    let outputWay = document.getElementById('way');//привязка до элемента на html-странице
+    let outputWay = document.getElementById('way');
     for (let i = 0; i < spiralArray.index.length; i++) {
-        way += spiralArray.index[i] + '<br>';//запись массива в строку
+        way += spiralArray.index[i] + ' => ';//add array to string
     }
-    outputWay.innerHTML = way;//вывод строки в html
+    outputWay.innerHTML = way;//output string to html
 }
-
-//document.getElementById('start').onclick = drawArray();
